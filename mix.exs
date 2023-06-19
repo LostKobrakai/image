@@ -75,7 +75,8 @@ defmodule Image.MixProject do
         do: [
           {:nx, "~> 0.5", optional: true},
           {:bumblebee, "~> 0.2", optional: true},
-          {:exla, "~> 0.5", optional: true}
+          {:exla, "~> 0.5", optional: true},
+          {:scholar, "~> 0.1", optional: true}
         ]
       ),
 
