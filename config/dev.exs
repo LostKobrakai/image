@@ -17,7 +17,8 @@ config :ex_aws, :s3,
   port: 9000
 
 config :nx,
-  default_backend: EXLA.Backend
+  default_backend: EXLA.Backend,
+  default_defn_options: [compiler: EXLA]
 
 config :logger,
   level: :warning
