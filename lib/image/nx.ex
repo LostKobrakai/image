@@ -123,21 +123,13 @@ if match?({:module, _module}, Code.ensure_compiled(Nx)) do
         max = Nx.to_number(Nx.reduce_max(unique_indices))
         color_count = Nx.concatenate([diff(unique_indices), Nx.tensor([count - max])])
 
-        Nx.to_list(color_count)
-        |> Enum.zip(Nx.to_list(unique_colors))
-        |> Enum.sort(:desc)
+        {color_count, unique_colors}
       end
     end
 
     def kmeans(%Vimage{} = image, options \\ []) do
-      kmeans =
-        image
-        |> unique_colors()
-        |> Scholar.Cluster.KMeans.fit(options)
-
-        kmeans.clusters
-        |> Nx.round()
-        |> Nx.as_type(:u8)
+      {_count, colors} = unique_colors(image)
+      Scholar.Cluster.KMeans.fit(Nx.tensor(colors), options)
     end
   end
 end
